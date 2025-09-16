@@ -1,281 +1,384 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chandru AI Art</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap">
-  <link rel="icon" href="../all.images/myicon.png">
-  <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+import React, { useState } from "react";
+import { Button } from "/components/ui/button";
+import { Input } from "/components/ui/input";
+import { Textarea } from "/components/ui/textarea";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "/components/ui/card";
 
-    body {
-        min-height: 100vh;
-        padding: 1rem;
-        background: linear-gradient(135deg, #090a0f 0%, #001f3f 100%) scroll;
-        color: #f5f7fa;
-        font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
-        position: relative;
-        overflow: auto;
-        letter-spacing: 0.02em;
-    }
+const Portfolio = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
-    /* Star effect */
-    body::before {
-        content: "";
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 0;
-        pointer-events: none;
-        background: 
-            radial-gradient(white 1px, transparent 1px),
-            radial-gradient(white 1px, transparent 1px),
-            radial-gradient(white 1px, transparent 1px);
-        background-size: 80px 80px, 120px 120px, 160px 160px;
-        background-position: 0 0, 40px 60px, 80px 120px;
-        opacity: 0.18;
-    }
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Form submission logic would go here
+    console.log({ name, email, message });
+    setName("");
+    setEmail("");
+    setMessage("");
+  };
 
-    /* Planets, asteroids, astronaut */
-    .planet {
-        position: absolute;
-        border-radius: 50%;
-        z-index: 2;
-        opacity: 0.85;
-        box-shadow: 0 0 40px 10px #2228;
-    }
-    .planet1 {
-        width: 80px; height: 80px;
-        top: 15vh; left: 8vw;
-        background: radial-gradient(circle at 30% 30%, #ffe066 70%, #bfa600 100%);
-        border: 4px solid #fffbe7;
-    }
-    .planet2 {
-        width: 50px; height: 50px;
-        bottom: 18vh; right: 12vw;
-        background: radial-gradient(circle at 60% 40%, #6ec6ff 70%, #003366 100%);
-        border: 3px solid #e0f7fa;
-    }
-    .asteroid {
-        position: absolute;
-        background: #b0a08f;
-        border-radius: 50% 60% 55% 45% / 60% 50% 55% 45%;
-        z-index: 2;
-        opacity: 0.7;
-        box-shadow: 0 0 12px 2px #2226;
-    }
-    .asteroid1 {
-        width: 32px; height: 22px;
-        top: 40vh; left: 25vw;
-        transform: rotate(-18deg);
-    }
-    .asteroid2 {
-        width: 22px; height: 16px;
-        bottom: 30vh; right: 30vw;
-        transform: rotate(12deg);
-    }
-    .astronaut {
-        position: absolute;
-        bottom: 10vh; left: 7vw;
-        width: 38px; height: 70px;
-        z-index: 3;
-    }
-    .astronaut::before {
-        content: "";
-        position: absolute;
-        left: 10px; top: 0;
-        width: 18px; height: 18px;
-        background: #fff;
-        border-radius: 50%;
-        border: 2px solid #b0e0e6;
-        box-shadow: 0 0 8px #fff;
-    }
-    .astronaut::after {
-        content: "";
-        position: absolute;
-        left: 14px; top: 18px;
-        width: 10px; height: 32px;
-        background: #e0e6f0;
-        border-radius: 6px;
-        border: 2px solid #b0e0e6;
-    }
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    element?.scrollIntoView({ behavior: "smooth" });
+  };
 
-    /* Headings */
-    h1, h2, h3 {
-        font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: #ffffff;
-        text-shadow: 0 0 8px #00bfff33, 0 0 16px #001f4d33;
-        margin-bottom: 1rem;
-        z-index: 1;
-        text-align: center;
-        padding: 2rem 0 0.5rem 0;
-    }
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Navigation */}
+      <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-sm border-b border-border z-50">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex justify-between items-center">
+            <h1 className="text-xl font-bold text-primary">Jane Doe</h1>
+            <div className="hidden md:flex space-x-6">
+              <button
+                onClick={() => scrollToSection("hero")}
+                className="text-foreground hover:text-primary transition-colors"
+              >
+                Home
+              </button>
+              <button
+                onClick={() => scrollToSection("about")}
+                className="text-foreground hover:text-primary transition-colors"
+              >
+                About
+              </button>
+              <button
+                onClick={() => scrollToSection("projects")}
+                className="text-foreground hover:text-primary transition-colors"
+              >
+                Projects
+              </button>
+              <button
+                onClick={() => scrollToSection("skills")}
+                className="text-foreground hover:text-primary transition-colors"
+              >
+                Skills
+              </button>
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="text-foreground hover:text-primary transition-colors"
+              >
+                Contact
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
 
-    /* Form styling */
-    form, fieldset {
-        background: rgba(10, 18, 30, 0.85);
-        border-radius: 12px;
-        box-shadow: 0 4px 32px #001f3f44;
-        padding: 2rem 2.5rem;
-        margin: 2rem auto;
-        max-width: 420px;
-        z-index: 2;
-        border: none;
-    }
+      {/* Hero Section */}
+      <section id="hero" className="pt-32 pb-20 px-4">
+        <div className="container mx-auto text-center">
+          <div className="max-w-3xl mx-auto">
+            <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center">
+              <svg
+                className="w-20 h-20 text-primary"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                />
+              </svg>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-foreground">
+              Jane Doe
+            </h1>
+            <h2 className="text-xl md:text-2xl text-muted-foreground mb-8">
+              Frontend Developer & UI/UX Designer
+            </h2>
+            <p className="text-lg text-muted-foreground mb-8">
+              Crafting beautiful, responsive web experiences with modern
+              technologies and user-centered design principles.
+            </p>
+            <div className="flex justify-center space-x-4">
+              <Button onClick={() => scrollToSection("projects")}>
+                View Work
+              </Button>
+              <Button variant="outline" onClick={() => scrollToSection("contact")}>
+                Get In Touch
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    label {
-        font-size: 1.1rem;
-        color: #aee7ff;
-        margin-bottom: 0.3rem;
-        display: block;
-        font-weight: 500;
-    }
+      {/* About Section */}
+      <section id="about" className="py-20 px-4 bg-muted">
+        <div className="container mx-auto">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
+              About Me
+            </h2>
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <img 
+                  src="https://placeholder-image-service.onrender.com/image/400x400?prompt=Portrait of a professional female frontend developer working on laptop in modern office environment&id=about-portrait-01" 
+                  alt="Professional portrait of a frontend developer working in a modern office setting" 
+                  className="rounded-lg shadow-lg w-full"
+                />
+              </div>
+              <div>
+                <p className="text-muted-foreground mb-4">
+                  I'm a passionate frontend developer with 5+ years of experience
+                  creating modern web applications. I specialize in React,
+                  TypeScript, and modern CSS frameworks while maintaining a
+                  strong focus on user experience and accessibility.
+                </p>
+                <p className="text-muted-foreground mb-4">
+                  My background in design allows me to bridge the gap between
+                  visual design and technical implementation, ensuring that
+                  every project I work on is both beautiful and functional.
+                </p>
+                <p className="text-muted-foreground">
+                  When I'm not coding, you can find me exploring new design
+                  trends, contributing to open source projects, or hiking in the
+                  mountains to clear my mind.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    input, textarea {
-        width: 100%;
-        padding: 0.7rem 1rem;
-        margin-bottom: 1.2rem;
-        border-radius: 6px;
-        border: 1px solid #003366;
-        background: #0a1120;
-        color: #e0e6f0;
-        font-size: 1rem;
-        font-family: inherit;
-        transition: border 0.2s;
-    }
-    input:focus, textarea:focus {
-        border: 1.5px solid #00bfff;
-        outline: none;
-    }
+      {/* Projects Section */}
+      <section id="projects" className="py-20 px-4">
+        <div className="container mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
+            Featured Projects
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Project 1 */}
+            <Card className="overflow-hidden">
+              <img 
+                src="https://placeholder-image-service.onrender.com/image/400x250?prompt=E-commerce website dashboard with product listings, shopping cart, and user profile section&id=project-ecommerce-01" 
+                alt="E-commerce dashboard interface showing product catalog and shopping cart functionality" 
+                className="w-full h-48 object-cover"
+              />
+              <CardHeader>
+                <CardTitle>E-Commerce Platform</CardTitle>
+                <CardDescription>
+                  Modern React e-commerce site with shopping cart and payment integration
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Built with React, TypeScript, and Stripe API. Features include
+                  product filtering, user authentication, and order tracking.
+                </p>
+              </CardContent>
+              <CardFooter>
+                <Button variant="outline" className="w-full">
+                  View Project
+                </Button>
+              </CardFooter>
+            </Card>
 
-    /* Button */
-    button {
-        background: linear-gradient(90deg, #003366 0%, #00bfff 100%);
-        color: #fff;
-        border: none;
-        padding: 0.9rem 2.2rem;
-        border-radius: 8px;
-        font-size: 1.15rem;
-        font-weight: 700;
-        box-shadow: 0 0 12px #00bfff55, 0 0 24px #001f4d33;
-        cursor: pointer;
-        transition: background 0.3s, box-shadow 0.3s;
-        z-index: 1;
-        margin-top: 0.5rem;
-        letter-spacing: 0.04em;
-    }
-    button:hover {
-        background: linear-gradient(90deg, #00bfff 0%, #003366 100%);
-        box-shadow: 0 0 24px #00bfff99;
-    }
+            {/* Project 2 */}
+            <Card className="overflow-hidden">
+              <img 
+                src="https://placeholder-image-service.onrender.com/image/400x250?prompt=Task management application with kanban board, calendar view, and productivity metrics&id=project-taskmanager-01" 
+                alt="Task management application interface with kanban board and calendar integration" 
+                className="w-full h-48 object-cover"
+              />
+              <CardHeader>
+                <CardTitle>Task Management App</CardTitle>
+                <CardDescription>
+                  Collaborative project management tool with real-time updates
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Developed with Next.js, WebSockets, and PostgreSQL. Includes
+                  drag-and-drop functionality and team collaboration features.
+                </p>
+              </CardContent>
+              <CardFooter>
+                <Button variant="outline" className="w-full">
+                  View Project
+                </Button>
+              </CardFooter>
+            </Card>
 
-    /* Footer */
-    footer {
-        background: rgba(0, 10, 30, 0.85);
-        color: #aee7ff;
-        text-align: center;
-        padding: 1.5rem 0 1rem 0;
-        margin-top: 2rem;
-        font-size: 1.1rem;
-        letter-spacing: 0.04em;
-        border-top: 1px solid #003366;
-        z-index: 2;
-        position: relative;
-    }
-  </style>
-</head>
-<body>
-  <!-- Space objects -->
-  <div class="planet planet1"></div>
-  <div class="planet planet2"></div>
-  <div class="asteroid asteroid1"></div>
-  <div class="asteroid asteroid2"></div>
-  <div class="astronaut"></div>
+            {/* Project 3 */}
+            <Card className="overflow-hidden">
+              <img 
+                src="https://placeholder-image-service.onrender.com/image/400x250?prompt=Weather application dashboard showing current conditions, forecast, and interactive maps&id=project-weather-01" 
+                alt="Weather application interface with current conditions and multi-day forecast display" 
+                className="w-full h-48 object-cover"
+              />
+              <CardHeader>
+                <CardTitle>Weather Dashboard</CardTitle>
+                <CardDescription>
+                  Real-time weather application with interactive maps and alerts
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Built using Vue.js, Chart.js, and Weather API. Features
+                  location-based forecasting and severe weather notifications.
+                </p>
+              </CardContent>
+              <CardFooter>
+                <Button variant="outline" className="w-full">
+                  View Project
+                </Button>
+              </CardFooter>
+            </Card>
+          </div>
+        </div>
+      </section>
 
-  <div>
-    <h1>Welcome's Chandru-AI-Art</h1>
-  </div>
-  <div>
-    <form id="applicationForm">
-      <fieldset>
-        <legend>Application Form</legend>
-        <label for="fristName">First Name :</label>
-        <input type="text" name="fristName" id="fristName" placeholder="Chandru" required autofocus>
-        <label for="lastName">Last Name :</label>
-        <input type="text" name="lastName" id="lastName" placeholder="AI" required>
-        <label for="email">Email :</label>
-        <input type="email" name="email" id="email" placeholder="you@example.com" required>
-        <label for="phone">Phone :</label>
-        <input type="tel" name="phone" id="phone" placeholder="822031965012345" required minlength="15" maxlength="15" pattern="\d{15}" inputmode="numeric">
-        <small>Enter a 15-digit phone number (numbers only).</small>
-        <label for="requirement">Requirement :</label>
-        <textarea name="requirement" id="requirement" rows="8" maxlength="500" placeholder="I’m Chandru, a developer in the making — blending Applied Mathematics, Physics, and Computer Science into interactive, problem‑solving web applications. This section will soon tell my story, my skills, and my vision for the future." style="width:100%; resize:vertical;"></textarea>
-        <button type="submit" id="orderBtn">Place Your Order</button>
-      </fieldset>
-    </form>
-    <div id="responseBox" style="margin:20px 0; color:green;"></div>
-  </div>
-  <footer>
-    <h1 id="contactUs">Contact Us</h1>
-    <nav class="contactUs">
-      <p id="contactEmail">chandrumani1825@gamil.com</p>
-      <p id="contactPhone">8220319650</p>
-    </nav>
-  </footer>
-  <script>
-    // Save user details and fetch from httpbin on submit
-    document.addEventListener("DOMContentLoaded", function() {
-      const orderBtn = document.getElementById("orderBtn");
-      const responseBox = document.getElementById("responseBox");
-      const form = document.getElementById("applicationForm");
+      {/* Skills Section */}
+      <section id="skills" className="py-20 px-4 bg-muted">
+        <div className="container mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
+            Skills & Technologies
+          </h2>
+          <div className="grid md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-center">Frontend</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <p className="text-muted-foreground">
+                  React, Vue.js, TypeScript, JavaScript, HTML5, CSS3, Tailwind
+                </p>
+              </CardContent>
+            </Card>
 
-      form.addEventListener("submit", function(e) {
-        e.preventDefault();
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-center">Backend</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <p className="text-muted-foreground">
+                  Node.js, Express, PostgreSQL, MongoDB, REST APIs, GraphQL
+                </p>
+              </CardContent>
+            </Card>
 
-        // Get user details from form
-        const firstName = document.getElementById("fristName")?.value || "";
-        const lastName = document.getElementById("lastName")?.value || "";
-        const email = document.getElementById("email")?.value || "";
-        const phone = document.getElementById("phone")?.value || "";
-        const requirement = document.getElementById("requirement")?.value || "";
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-center">Design</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <p className="text-muted-foreground">
+                  Figma, Adobe XD, UI/UX Design, Responsive Design, Accessibility
+                </p>
+              </CardContent>
+            </Card>
 
-        // Save details to localStorage
-        const userDetails = {
-          firstName,
-          lastName,
-          email,
-          phone,
-          requirement
-        };
-        localStorage.setItem("userDetails", JSON.stringify(userDetails));
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-center">Tools</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <p className="text-muted-foreground">
+                  Git, Docker, Webpack, Vite, Jest, CI/CD, AWS
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
 
-        // Update contact info
-        document.getElementById("contactEmail").textContent = email;
-        document.getElementById("contactPhone").textContent = phone;
+      {/* Contact Section */}
+      <section id="contact" className="py-20 px-4">
+        <div className="container mx-auto">
+          <div className="max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
+              Get In Touch
+            </h2>
+            <Card>
+              <CardHeader>
+                <CardTitle>Send me a message</CardTitle>
+                <CardDescription>
+                  I'm always interested in new opportunities and collaborations
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <Input
+                      type="text"
+                      placeholder="Your Name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Input
+                      type="email"
+                      placeholder="Your Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Textarea
+                      placeholder="Your Message"
+                      rows={5}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <Button type="submit" className="w-full">
+                    Send Message
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+            <div className="flex justify-center space-x-6 mt-8">
+              <a href="#" className="text-primary hover:text-foreground transition-colors">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                </svg>
+              </a>
+              <a href="#" className="text-primary hover:text-foreground transition-colors">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-6h11v6zm5 0h-3v-6h3v6zm0-8H4V6h16v4z"/>
+                </svg>
+              </a>
+              <a href="#" className="text-primary hover:text-foreground transition-colors">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20 3H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM8.339 18.337H5.667v-8.59h2.672v8.59zM7.003 8.574a1.548 1.548 0 1 1 0-3.096 1.548 1.548 0 0 1 0 3.096zm11.335 9.763h-2.669V14.16c0-.996-.018-2.277-1.388-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248h-2.667v-8.59h2.56v1.174h.037c.355-.675 1.227-1.387 2.524-1.387 2.704 0 3.203 1.778 3.203 4.092v4.71z"/>
+                </svg>
+              </a>
+              <a href="#" className="text-primary hover:text-foreground transition-colors">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        // Fetch from httpbin and show response
-        fetch("https://httpbin.org/get")
-          .then(response => response.json())
-          .then(data => {
-            responseBox.textContent = "Response: " + JSON.stringify(data, null, 2);
-          })
-          .catch(error => {
-            responseBox.textContent = "Error: " + error;
-          });
-      });
+      {/* Footer */}
+      <footer className="py-8 px-4 border-t border-border">
+        <div className="container mx-auto text-center">
+          <p className="text-muted-foreground">
+            © 2024 Jane Doe. Built with React and Tailwind CSS.
+          </p>
+        </div>
+      </footer>
+    </div>
+  );
+};
 
-      // Only allow numbers in phone input
-      document.getElementById('phone').addEventListener('input', function (e) {
-        this.value = this.value.replace(/\D/g, '').slice(0, 15);
-      });
-    });
-  </script>
-</body>
-</html>
+export default Portfolio;
